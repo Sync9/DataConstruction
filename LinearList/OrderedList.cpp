@@ -28,6 +28,10 @@ int main() {
 OrderedList init(int block){
     OrderedList orderedList;
     orderedList.head=(int*)malloc(sizeof(int)*block);
+    if(orderedList.head==NULL) {
+        std::cout<<"Fail to initialize the ordered list"<<std::endl;
+        exit(0);                     
+    }
     orderedList.length=block;
     orderedList.size=orderedList.length*sizeof(int);
     return orderedList;
