@@ -8,6 +8,7 @@ void add(slink* head,int data);
 void display(slink* head);
 void find(slink* head,int data);
 void remove(slink* head,int data);
+slink* reverseSinglyLinkedListByUsingThreePointers(slink* head);
 int main() {
     int input=0;
     slink* head=init();
@@ -72,7 +73,7 @@ void add(slink* head,int data){
 }
 void display(slink* head){
     slink* head_ptr=(slink*)malloc(sizeof(slink));
-    head_ptr=head->next;
+    head_ptr=head;
     while(head_ptr) {
         std::cout << head_ptr->data << std::endl;
         head_ptr=head_ptr->next;
@@ -118,4 +119,27 @@ void remove(slink* head,int data){
         free(pre_ptr);
     }
 }
-
+slink* reverseSinglyLinkedListByUsingThreePointers(slink* head){
+    slink* beg=(slink*)malloc(sizeof(slink));
+    slink* mid=(slink*)malloc(sizeof(slink));
+    slink* end=(slink*)malloc(sizeof(slink));
+    slink* saved_head;
+    beg= nullptr;
+    mid= head;
+    end= head->next;
+    while(end){
+        mid->next=beg;
+        beg=mid;
+        mid=end;
+        end=end->next;
+    }
+    mid->next=beg;
+    saved_head=mid;
+    beg= nullptr;
+    mid= nullptr;
+    end= nullptr;
+    free(beg);
+    free(mid);
+    free(end);
+    return saved_head;
+}
